@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT summarizer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/favi.png">
+
+    <style>
+    
+      body{
+        /* background-image:  url('./static/title.jpg'); */
+        background-color: rgb(237, 234, 234);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+      }
+      .bottom{
+        margin:2.7%
+      }
+      footer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border:1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+      input{
+        height: 40%;
+      }
+      .card_body{
+        margin:90%;
+      }
+      .mid{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+      .search_bar{
+        padding: 10%;
+        padding-top:6%;
+      }
+      .card_info{
+        padding: 10%;
+        padding-top:6%;
+      }
+    </style>
+</head>
+<body onload="scrollToBottom()">
+<!--NavBar-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="/">YT summarizer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+
+
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- profile -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    &#128512; {{u}}
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" >&#128512;  {{u}}</a></li>
+    <li><a class="dropdown-item" href="#">&#128262; Settings</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item nav-link" style="color:red;" href="{{url_for('logout')}}">&#127939; Logout</a></li>
+  </ul>
+</li>
+
+<!-- profile -->
+          </ul>
+        </form>
+
+      </div>
+    </div>
+  </nav>
+<!--NavBar-->
+<!--body-->
+
+<!---->
+
+{% for row in rows %}
+<form action="{{url_for('delete')}}" method="post">
+<div class="card_info ">
+  <input type="text" value="{{row[0]}}" hidden>
+<div class="card mid">
+  <div class="card-header" style="display: flex;justify-content:space-between;">
+    Text info
+    <input type="text" value="{{row[0]}}" name="link" hidden>
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <div>{{row[1] | safe}}</div><br>
+      <div class="blockquote-footer"><cite title="Source Title">Hope this is useful</cite></div><br>
+    </blockquote>
+  </div>
+</div>
+</div>
+</form>
+{% endfor %}
+
+<!---->
+<footer>
+<form action="{{url_for('home')}}" method="post">
+  <div  class="bottom" style="display: flex;">
+    <input type="text" class="form-control" name="url" style="height:60px;font-size: 23px;" placeholder="Enter the URL" aria-label="Enter the URL" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="submit" style="font-size: 16px;" id="button-addon2">&#8686; Send</button>
+  </div>
+  </form>
+</footer>
+
+
+<!--body-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+   function scrollToBottom() {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+</script>
+</body>
+</html>
